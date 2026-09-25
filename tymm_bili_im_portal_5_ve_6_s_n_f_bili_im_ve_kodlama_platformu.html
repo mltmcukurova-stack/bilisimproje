@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TYMM Bilişim Portalı | 5 ve 6. Sınıf Bilişim ve Kodlama Dünyası</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              950: '#082f49'
+            },
+            accent: {
+              500: '#2563eb',
+              600: '#1d4ed8',
+              700: '#1e40af'
+            },
+            surface: {
+              base: '#f8fafc',
+              card: '#ffffff',
+              muted: '#f1f5f9',
+              border: '#e2e8f0',
+              hover: '#f8fafc'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            outfit: ['"Outfit"', 'sans-serif']
+          },
+          boxShadow: {
+            'card-sm': '0 2px 6px -1px rgba(15, 23, 42, 0.04), 0 1px 3px -1px rgba(15, 23, 42, 0.02)',
+            'card-md': '0 10px 25px -4px rgba(2, 132, 199, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04)',
+            'card-lg': '0 20px 35px -8px rgba(2, 132, 199, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Mobile-first base styles */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      overflow-x: hidden;
+    }
+
+    /* Ambient tech background pattern */
+    .bg-tech-grid {
+      background-size: 28px 28px;
+      background-image: 
+        linear-gradient(to right, rgba(2, 132, 199, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 132, 199, 0.04) 1px, transparent 1px);
+    }
+
+    /* Clean Card Styling */
+    .app-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (hover: hover) {
+      .app-card:hover {
+        border-color: #bae6fd;
+        box-shadow: 0 12px 28px -6px rgba(2, 132, 199, 0.12);
+        transform: translateY(-2px);
+      }
+    }
+
+    /* Safe bottom area for smartphones */
+    .safe-bottom-padding {
+      padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Modern Slim Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+  </style>
+</head>
+<body class="bg-tech-grid font-sans safe-bottom-padding flex flex-col min-h-screen">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-3 shadow-card-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Brand & TYMM Badge -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-brand-600 via-accent-500 to-sky-400 text-white flex items-center justify-center shadow-md shadow-brand-500/20 shrink-0">
+          <i data-lucide="cpu" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-outfit font-black tracking-tight text-lg sm:text-xl text-slate-900 leading-none">BİLİŞİM PORTALI</span>
+            <span class="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-800 border border-brand-200 font-mono">TYMM</span>
+          </div>
+          <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">5 & 6. Sınıf Bilişim Teknolojileri ve Kodlama</p>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation Tabs (Hidden on mobile phones, shown on md+) -->
+      <nav class="hidden md:flex items-center gap-1.5 text-xs lg:text-sm font-semibold">
+        <button onclick="switchTab('curriculum')" id="desk-nav-curriculum" class="desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition bg-brand-600 text-white shadow-sm">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Haftalık Dersler</span>
+        </button>
+        <button onclick="switchTab('games')" id="desk-nav-games" class="desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition text-slate-600 hover:text-brand-600 hover:bg-slate-100">
+          <i data-lucide="gamepad-2" class="w-4 h-4 text-brand-600"></i>
+          <span>Oyunlar</span>
+        </button>
+        <button onclick="switchTab('encyclopedia')" id="desk-nav-encyclopedia" class="desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition text-slate-600 hover:text-brand-600 hover:bg-slate-100">
+          <i data-lucide="layers" class="w-4 h-4 text-sky-600"></i>
+          <span>Ansiklopedi</span>
+        </button>
+        <button onclick="switchTab('ai')" id="desk-nav-ai" class="desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition text-slate-600 hover:text-brand-600 hover:bg-slate-100">
+          <i data-lucide="bot" class="w-4 h-4 text-emerald-600"></i>
+          <span class="relative">
+            Bilişim AI
+            <span class="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+          </span>
+        </button>
+      </nav>
+
+      <!-- User XP & Sound Controller -->
+      <div class="flex items-center gap-2">
+        <!-- Sound Toggle Button -->
+        <button onclick="toggleAudio()" id="btn-audio-toggle" class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5 text-xs font-semibold" title="Ses Aç/Kapat">
+          <i data-lucide="volume-2" id="audio-icon" class="w-4 h-4 text-brand-600"></i>
+          <span class="hidden sm:inline" id="audio-label">Ses Açık</span>
+        </button>
+
+        <!-- XP & Level Badge -->
+        <div class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 shadow-sm cursor-pointer" onclick="openBadgesModal()">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-r from-brand-600 to-accent-600 text-white flex items-center justify-center font-outfit text-xs font-black" id="top-level-badge">
+            L1
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider" id="top-role-label">Bilişim Çırağı</span>
+            <span class="text-xs font-mono font-extrabold text-brand-700" id="top-xp-val">0 XP</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+    
+    <!-- ============================================================== -->
+    <!-- TAB 1: HAFTALIK DERSLER (5. ve 6. Sınıf TYMM Müfredatı)       -->
+    <!-- ============================================================== -->
+    <section id="tab-curriculum" class="tab-pane space-y-5">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="app-card p-5 sm:p-7 bg-gradient-to-br from-white via-brand-50/50 to-sky-50 border border-brand-200 relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl space-y-2.5">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-bold border border-brand-200">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i>
+            Türkiye Yüzyılı Maarif Modeli Uyumlu
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-outfit text-slate-900 tracking-tight leading-tight">
+            Geleceğin Teknolojisini <span class="text-brand-600">Adım Adım</span> Keşfet!
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Ortaokul Bilişim Teknolojileri ve Yazılım dersi haftalık konuları, gerçek yaşam senaryoları, anahtar terimler ve mini testlerle öğrenmeyi pekiştir.
+          </p>
+
+          <!-- Grade Selector & Search Filter -->
+          <div class="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <!-- Grade Switcher -->
+            <div class="grid grid-cols-2 p-1 rounded-2xl bg-white border border-slate-300 shadow-sm text-xs font-bold">
+              <button onclick="setGrade(5)" id="btn-grade-5" class="grade-pill py-2.5 px-4 rounded-xl bg-brand-600 text-white font-extrabold shadow-sm transition text-center flex items-center justify-center gap-1.5">
+                <i data-lucide="check" class="w-3.5 h-3.5" id="icon-g5"></i>
+                <span>5. Sınıf Dersi</span>
+              </button>
+              <button onclick="setGrade(6)" id="btn-grade-6" class="grade-pill py-2.5 px-4 rounded-xl text-slate-600 hover:text-brand-700 transition text-center flex items-center justify-center gap-1.5">
+                <i data-lucide="circle" class="w-3.5 h-3.5 opacity-40" id="icon-g6"></i>
+                <span>6. Sınıf Dersi</span>
+              </button>
+            </div>
+
+            <!-- Search Field -->
+            <div class="relative w-full sm:w-72">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+              <input 
+                type="text" 
+                id="search-input" 
+                oninput="handleSearch()"
+                placeholder="Konu, donanım veya kavram ara..." 
+                class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 shadow-sm"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
+        <div class="app-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold">Tamamlanan Konu</div>
+            <div class="text-sm sm:text-lg font-outfit font-black text-slate-900" id="stat-completed">0 / 16</div>
+          </div>
+        </div>
+
+        <div class="app-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold">Toplam XP</div>
+            <div class="text-sm sm:text-lg font-outfit font-black text-slate-900" id="stat-xp">0 XP</div>
+          </div>
+        </div>
+
+        <div class="app-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+            <i data-lucide="file-question" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold">Çözülen Mini Test</div>
+            <div class="text-sm sm:text-lg font-outfit font-black text-slate-900" id="stat-quiz-count">0 Adet</div>
+          </div>
+        </div>
+
+        <div class="app-card p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold">Kazanılan Rozet</div>
+            <div class="text-sm sm:text-lg font-outfit font-black text-slate-900" id="stat-badge-count">0 / 6</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weekly Cards Grid -->
+      <div id="curriculum-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <!-- Rendered via JS -->
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: OYUNLAR (3 İnteraktif Eğitsel Oyun)                     -->
+    <!-- ============================================================== -->
+    <section id="tab-games" class="tab-pane hidden space-y-4 sm:space-y-5">
+      
+      <!-- Games Header & Tabs -->
+      <div class="app-card p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600">Öğrenmeyi Pekiştiren Etkinlikler</span>
+          <h2 class="text-xl sm:text-2xl font-black font-outfit text-slate-900">İnteraktif Bilişim Oyunları</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Mobil uyumlu, dokunmatik kontrollerle teorik bilgileri pratiğe dök!</p>
+        </div>
+
+        <!-- Game Selector Chips -->
+        <div class="grid grid-cols-3 gap-1.5 p-1 rounded-2xl bg-slate-100 border border-slate-200 text-xs font-bold">
+          <button onclick="switchGame('shield')" id="game-btn-shield" class="game-nav-btn py-2 px-2 sm:px-3 rounded-xl bg-brand-600 text-white font-bold transition text-center shadow-sm">
+            1. Siber Kalkan
+          </button>
+          <button onclick="switchGame('sorter')" id="game-btn-sorter" class="game-nav-btn py-2 px-2 sm:px-3 rounded-xl text-slate-600 hover:text-brand-600 transition text-center">
+            2. Donanım Rafı
+          </button>
+          <button onclick="switchGame('robot')" id="game-btn-robot" class="game-nav-btn py-2 px-2 sm:px-3 rounded-xl text-slate-600 hover:text-brand-600 transition text-center">
+            3. Robot Lab
+          </button>
+        </div>
+      </div>
+
+      <!-- OYUN 1: SİBER GÜVENLİK KALKANI -->
+      <div id="game-pane-shield" class="game-view app-card p-4 sm:p-6 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center font-bold">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-outfit font-extrabold text-base sm:text-lg text-slate-900">Siber Güvenlik Kalkanı</h3>
+              <p class="text-[11px] text-slate-500">Durumu incele: Siber kalkanı korumak için Güvenli mi yoksa Riskli mi karar ver!</p>
+            </div>
+          </div>
+
+          <!-- Score & Lives -->
+          <div class="flex items-center gap-2 text-xs font-bold font-mono">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Puan: <span id="shield-score" class="font-black">0</span>
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+              <i data-lucide="heart" class="w-3.5 h-3.5 fill-rose-500 text-rose-500"></i>
+              <span id="shield-lives" class="font-black">3</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Question Card Box -->
+        <div class="max-w-xl mx-auto py-2 sm:py-4 space-y-4 text-center">
+          <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200" id="shield-tag">
+            Oltalama (Phishing)
+          </span>
+
+          <div id="shield-scenario-box" class="p-5 sm:p-7 rounded-2xl bg-slate-50 border-2 border-slate-200 min-h-[140px] flex items-center justify-center text-sm sm:text-base font-semibold text-slate-800 leading-relaxed shadow-card-sm">
+            "Yükleniyor..."
+          </div>
+
+          <!-- Safe or Risky Action Buttons -->
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <button onclick="evaluateShield(false)" class="p-3.5 sm:p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 active:scale-95 border-2 border-rose-200 text-rose-700 font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition shadow-sm">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600"></i>
+              <span>RİSKLİ / TEHLİKE</span>
+            </button>
+            <button onclick="evaluateShield(true)" class="p-3.5 sm:p-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100 active:scale-95 border-2 border-emerald-200 text-emerald-700 font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition shadow-sm">
+              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
+              <span>GÜVENLİ / DOĞRU</span>
+            </button>
+          </div>
+
+          <div id="shield-feedback-msg" class="text-xs sm:text-sm font-bold min-h-[22px] transition-all"></div>
+        </div>
+      </div>
+
+      <!-- OYUN 2: DONANIM & YAZILIM SINIFLANDIRICI -->
+      <div id="game-pane-sorter" class="game-view hidden app-card p-4 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-outfit font-extrabold text-base sm:text-lg text-slate-900">Donanım & Yazılım Sınıflandırıcı</h3>
+              <p class="text-[11px] text-slate-500">Ortadaki bilişim bileşeninin hangi kategoriye ait olduğunu doğru seç!</p>
+            </div>
+          </div>
+
+          <div class="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-brand-50 text-brand-700 border border-brand-200">
+            Doğru: <span id="sorter-score" class="font-black">0</span> / 10
+          </div>
+        </div>
+
+        <div class="max-w-xl mx-auto py-2 sm:py-4 space-y-4 text-center">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Sıradaki Kart</span>
+          
+          <div id="sorter-current-item" class="p-4 sm:p-6 rounded-2xl bg-white border-2 border-brand-500 text-base sm:text-xl font-outfit font-extrabold text-slate-900 shadow-card-sm inline-block min-w-[260px]">
+            SSD (Katı Hal Sürücü)
+          </div>
+
+          <!-- Category Buttons Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+            <button onclick="sortItem('giris')" class="p-3 rounded-2xl bg-slate-50 hover:bg-brand-50 active:scale-95 border-2 border-slate-200 hover:border-brand-400 flex flex-col items-center justify-center gap-1 transition text-center group">
+              <i data-lucide="keyboard" class="w-5 h-5 text-brand-600 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-bold text-slate-800">Giriş Birimi</span>
+              <span class="text-[10px] text-slate-500">Klavye, Fare...</span>
+            </button>
+            <button onclick="sortItem('cikis')" class="p-3 rounded-2xl bg-slate-50 hover:bg-brand-50 active:scale-95 border-2 border-slate-200 hover:border-brand-400 flex flex-col items-center justify-center gap-1 transition text-center group">
+              <i data-lucide="monitor" class="w-5 h-5 text-sky-600 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-bold text-slate-800">Çıkış Birimi</span>
+              <span class="text-[10px] text-slate-500">Ekran, Yazıcı...</span>
+            </button>
+            <button onclick="sortItem('depolama')" class="p-3 rounded-2xl bg-slate-50 hover:bg-brand-50 active:scale-95 border-2 border-slate-200 hover:border-brand-400 flex flex-col items-center justify-center gap-1 transition text-center group">
+              <i data-lucide="hard-drive" class="w-5 h-5 text-indigo-600 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-bold text-slate-800">Depolama</span>
+              <span class="text-[10px] text-slate-500">SSD, Sabit Disk...</span>
+            </button>
+            <button onclick="sortItem('yazilim')" class="p-3 rounded-2xl bg-slate-50 hover:bg-brand-50 active:scale-95 border-2 border-slate-200 hover:border-brand-400 flex flex-col items-center justify-center gap-1 transition text-center group">
+              <i data-lucide="code" class="w-5 h-5 text-emerald-600 group-hover:scale-110 transition"></i>
+              <span class="text-xs font-bold text-slate-800">Yazılım</span>
+              <span class="text-[10px] text-slate-500">Pardus, Scratch...</span>
+            </button>
+          </div>
+
+          <div id="sorter-feedback-msg" class="text-xs sm:text-sm font-bold min-h-[22px] transition-all"></div>
+        </div>
+      </div>
+
+      <!-- OYUN 3: ALGORİTMA & ROBOT LAB -->
+      <div id="game-pane-robot" class="game-view hidden app-card p-4 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 gap-2">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-outfit font-extrabold text-base sm:text-lg text-slate-900">Algoritma & Robot Lab</h3>
+              <p class="text-[11px] text-slate-500">Komut bloklarını sıraya ekle, engelleri aş ve robotu çipe ulaştır!</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="resetRobotSim()" class="px-3 py-1.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-bold flex items-center gap-1 transition">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Sıfırla
+            </button>
+            <button onclick="runRobotSim()" class="px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-extrabold flex items-center gap-1 shadow-sm transition">
+              <i data-lucide="play" class="w-3.5 h-3.5 fill-white"></i> Kodu Çalıştır
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+          <!-- 4x4 Grid Board -->
+          <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="flex items-center gap-3 text-[11px] font-bold text-slate-600 mb-3 font-mono">
+              <span>🤖 Robot</span>
+              <span class="text-amber-600">⭐ Hedef Çip</span>
+              <span class="text-rose-600">🛑 Engel</span>
+            </div>
+            <div id="robot-grid-container" class="grid grid-cols-4 gap-2 w-64 h-64 p-2 bg-white rounded-2xl border-2 border-slate-200 shadow-inner">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Command Blocks Palette -->
+          <div class="space-y-3.5">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-700">1. Kod Blokları (Ekle)</span>
+              <div class="grid grid-cols-3 gap-2 mt-1.5">
+                <button onclick="pushRobotCommand('FORWARD')" class="p-2.5 rounded-xl bg-white border border-slate-300 hover:border-brand-500 active:scale-95 text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center gap-1 transition">
+                  <i data-lucide="arrow-up" class="w-4 h-4 text-brand-600"></i>
+                  <span>1 İleri Adım</span>
+                </button>
+                <button onclick="pushRobotCommand('RIGHT')" class="p-2.5 rounded-xl bg-white border border-slate-300 hover:border-brand-500 active:scale-95 text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center gap-1 transition">
+                  <i data-lucide="rotate-cw" class="w-4 h-4 text-brand-600"></i>
+                  <span>Sağa Dön (90°)</span>
+                </button>
+                <button onclick="pushRobotCommand('LEFT')" class="p-2.5 rounded-xl bg-white border border-slate-300 hover:border-brand-500 active:scale-95 text-xs font-bold text-slate-800 shadow-sm flex flex-col items-center gap-1 transition">
+                  <i data-lucide="rotate-ccw" class="w-4 h-4 text-brand-600"></i>
+                  <span>Sola Dön (90°)</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-700">2. Algoritma Dizilimi</span>
+                <span class="text-[11px] font-mono font-bold text-brand-600" id="robot-queue-length">0 / 8 Adım</span>
+              </div>
+              <div id="robot-commands-list" class="min-h-[110px] max-h-[140px] overflow-y-auto p-2.5 rounded-xl bg-slate-50 border border-slate-200 mt-1.5 space-y-1.5">
+                <div class="text-slate-400 text-xs text-center py-6" id="empty-robot-hint">Blok butonlarına dokunarak robotun algoritmasını tasarla.</div>
+              </div>
+            </div>
+
+            <div id="robot-status-feedback" class="text-xs font-bold min-h-[18px]"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: BİLİŞİM ANSİKLOPEDİSİ & KAVRAMLAR SÖZLÜĞÜ             -->
+    <!-- ============================================================== -->
+    <section id="tab-encyclopedia" class="tab-pane hidden space-y-4 sm:space-y-5">
+      <div class="app-card p-5 sm:p-6 space-y-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-brand-600">TYMM Terimler Kılavuzu</span>
+          <h2 class="text-xl sm:text-2xl font-black font-outfit text-slate-900">Bilişim Ansiklopedisi</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">5 ve 6. sınıf boyunca öğreneceğiniz tüm teknik terimlerin anlaşılır açıklamaları.</p>
+        </div>
+
+        <!-- Filter Category Chips -->
+        <div class="flex flex-wrap gap-2 pt-1">
+          <button onclick="filterDictionary('all')" class="dict-chip px-3 py-1.5 rounded-xl bg-brand-600 text-white text-xs font-bold shadow-sm transition">Tümü</button>
+          <button onclick="filterDictionary('donanim')" class="dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Donanım</button>
+          <button onclick="filterDictionary('yazilim')" class="dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Yazılım</button>
+          <button onclick="filterDictionary('guvenlik')" class="dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Siber Güvenlik</button>
+          <button onclick="filterDictionary('kodlama')" class="dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Algoritma & Kod</button>
+          <button onclick="filterDictionary('ag')" class="dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Ağ & İletişim</button>
+        </div>
+
+        <div id="dictionary-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 4: BİLİŞİM AI ÖĞRETMENİ (GEMINI 2.5 FLASH)                -->
+    <!-- ============================================================== -->
+    <section id="tab-ai" class="tab-pane hidden space-y-4">
+      <div class="app-card p-4 sm:p-6 space-y-4 shadow-card-md">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-accent-600 text-white flex items-center justify-center shadow-sm">
+              <i data-lucide="bot" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-outfit font-extrabold text-base sm:text-lg text-slate-900">SiberBot: Bilişim AI Rehberi</h3>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-extrabold border border-emerald-200">Çevrim İçi</span>
+              </div>
+              <p class="text-[11px] text-slate-500">TYMM ders kazanımlarına göre sorularınızı pedagojik örneklerle yanıtlar.</p>
+            </div>
+          </div>
+
+          <button onclick="clearChatThread()" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition" title="Sohbeti Temizle">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Quick Question Chips -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar">
+          <span class="text-slate-400 font-bold shrink-0 flex items-center gap-1">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-600"></i> Sor:
+          </span>
+          <button onclick="askPromptChip('Algoritma nedir? Günlük hayattan örnek ver.')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 font-medium whitespace-nowrap transition border border-slate-200">
+            Algoritma nedir?
+          </button>
+          <button onclick="askPromptChip('RAM ile Sabit Disk arasındaki fark nedir?')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 font-medium whitespace-nowrap transition border border-slate-200">
+            RAM ve Sabit Disk farkı
+          </button>
+          <button onclick="askPromptChip('Güçlü ve kırılmaz bir şifre nasıl oluşturulur?')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 font-medium whitespace-nowrap transition border border-slate-200">
+            Güçlü şifre kuralları
+          </button>
+          <button onclick="askPromptChip('Scratch kodlamada döngü (loop) ne işe yarar?')" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 text-slate-700 font-medium whitespace-nowrap transition border border-slate-200">
+            Döngü ne işe yarar?
+          </button>
+        </div>
+
+        <!-- Chat Conversation Messages -->
+        <div id="ai-chat-box" class="h-80 sm:h-96 overflow-y-auto space-y-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 text-xs">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div class="p-3.5 rounded-2xl rounded-tl-none bg-white border border-slate-200 text-slate-800 text-xs sm:text-sm max-w-[85%] leading-relaxed shadow-card-sm space-y-1">
+              <p class="font-bold text-brand-700">Merhaba Geleceğin Bilişimcisi! 👋</p>
+              <p>Ben senin Bilişim Teknolojileri ve Yazılım dersi rehberinim. Donanımlar, internet güvenliği, algoritmalar, akış şemaları ve Scratch kodlama ile ilgili aklına takılan her şeyi bana sorabilirsin!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Form -->
+        <form onsubmit="handleSendAiMessage(event)" class="flex items-center gap-2">
+          <input 
+            type="text" 
+            id="ai-prompt-input" 
+            placeholder="Bir soru sor... (Örn: 'İki adımlı doğrulama nedir?')"
+            class="flex-1 px-4 py-3 rounded-2xl bg-white border border-slate-300 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 shadow-sm"
+            required
+          />
+          <button 
+            type="submit" 
+            id="ai-submit-button"
+            class="px-4 sm:px-5 py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition shrink-0 active:scale-95">
+            <span>Gönder</span>
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          </button>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200 py-1.5 px-2 flex items-center justify-around shadow-lg">
+    <button onclick="switchTab('curriculum')" id="mob-nav-curriculum" class="mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-brand-600 font-bold transition flex-1">
+      <i data-lucide="book-open" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-0.5">Dersler</span>
+    </button>
+    <button onclick="switchTab('games')" id="mob-nav-games" class="mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-slate-500 hover:text-brand-600 transition flex-1">
+      <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-0.5">Oyunlar</span>
+    </button>
+    <button onclick="switchTab('encyclopedia')" id="mob-nav-encyclopedia" class="mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-slate-500 hover:text-brand-600 transition flex-1">
+      <i data-lucide="layers" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-0.5">Sözlük</span>
+    </button>
+    <button onclick="switchTab('ai')" id="mob-nav-ai" class="mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-slate-500 hover:text-brand-600 transition flex-1 relative">
+      <div class="relative">
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500"></span>
+      </div>
+      <span class="text-[10px] mt-0.5">AI Asistan</span>
+    </button>
+    <button onclick="openBadgesModal()" class="mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-slate-500 hover:text-brand-600 transition flex-1">
+      <i data-lucide="award" class="w-5 h-5"></i>
+      <span class="text-[10px] mt-0.5">Rozetler</span>
+    </button>
+  </div>
+
+  <!-- MODAL: HAFTALIK MİNİ TEST -->
+  <div id="quiz-modal-sheet" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/50 backdrop-blur-sm hidden">
+    <div class="app-card w-full max-w-xl rounded-t-3xl sm:rounded-3xl p-5 sm:p-7 border border-slate-200 shadow-card-lg bg-white max-h-[90vh] overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <span id="quiz-badge-grade" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-100 text-brand-800">5. Sınıf</span>
+          <span id="quiz-badge-title" class="text-xs font-bold text-slate-700">1. Hafta Mini Testi</span>
+        </div>
+        <button onclick="closeQuizModal()" class="p-1 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="quiz-questions-body" class="space-y-4">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+        <span class="text-xs font-bold text-slate-500" id="quiz-warn-text">Tüm soruları işaretleyiniz.</span>
+        <button onclick="verifyQuizSubmission()" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs shadow-sm transition">
+          Cevapları Onayla (+30 XP)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BAŞARI ROZETLERİ -->
+  <div id="badges-modal-sheet" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/50 backdrop-blur-sm hidden">
+    <div class="app-card w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-card-lg bg-white space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="award" class="w-6 h-6 text-amber-500"></i>
+          <h3 class="font-outfit font-extrabold text-slate-900 text-lg">Başarı Rozetleri</h3>
+        </div>
+        <button onclick="closeBadgesModal()" class="p-1 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3" id="badges-modal-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==============================================================
+    // 1. WEB AUDIO API SYNTHESIZER (NO EXTERNAL AUDIO FILES)
+    // ==============================================================
+    class WebSoundFX {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+      }
+      playChime() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, this.ctx.currentTime); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.15); // A5
+          gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.25);
+        } catch (e) {}
+      }
+      playError() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(280, this.ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(140, this.ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.22);
+        } catch (e) {}
+      }
+      playFanfare() {
+        if (!this.enabled) return;
+        try {
+          this.init();
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.1, this.ctx.currentTime + (i * 0.08));
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + (i * 0.08) + 0.25);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(this.ctx.currentTime + (i * 0.08));
+            osc.stop(this.ctx.currentTime + (i * 0.08) + 0.28);
+          });
+        } catch (e) {}
+      }
+    }
+    const audioSynth = new WebSoundFX();
+
+    function toggleAudio() {
+      audioSynth.enabled = !audioSynth.enabled;
+      const icon = document.getElementById('audio-icon');
+      const label = document.getElementById('audio-label');
+      if (audioSynth.enabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        if (label) label.innerText = "Ses Açık";
+        audioSynth.playChime();
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+        if (label) label.innerText = "Ses Kapalı";
+      }
+      lucide.createIcons();
+    }
+
+    // ==============================================================
+    // 2. COMPLETE TYMM CURRICULUM (5 & 6. SINIF - 8'ER HAFTA)
+    // ==============================================================
+    const tymmCurriculum = {
+      grade5: [
+        {
+          week: 1,
+          title: "Bilişim Teknolojileri ve Günlük Yaşam",
+          subTitle: "Bilginin gücü, teknoloji kullanımı ve temel kavramlar",
+          summary: "Bilişim Teknolojileri (BT); bilginin toplanması, işlenmesi, saklanması ve ağlar üzerinden güvenle iletilmesini sağlayan araçların bütünüdür. Günümüzde sağlık, eğitim, bankacılık ve ulaşımda hayatımızı kolaylaştırır.",
+          concepts: [
+            { name: "Bilişim", desc: "Bilgi ile iletişim teknolojilerinin birleşimidir." },
+            { name: "Veri (Data)", desc: "İşlenmemiş ham bilgi parçacığı (sayı, kelime)." },
+            { name: "Enformasyon", desc: "Verinin anlamlı ve işlenmiş son halidir." }
+          ],
+          scenario: "Doktorun hastasının röntgen sonucunu bilgisayar sisteminden anında inceleyip tanı koyması bir bilişim uygulamasıdır.",
+          tip: "Bilgisayar karşısında dik oturmalı ve ekranın üst kenarı göz hizasında olmalıdır.",
+          quiz: [
+            { q: "Bilgisayara girilen henüz işlenmemiş ham bilgilere ne ad verilir?", options: ["Enformasyon", "Veri (Data)", "İşletim Sistemi", "Yazılım"], correct: 1 },
+            { q: "Aşağıdakilerden hangisi bilişim teknolojilerinin eğitimdeki kullanımına örnektir?", options: ["E-Okul sistemi", "Online market siparişi", "Otopark bariyeri", "Hava tahmini"], correct: 0 },
+            { q: "Bilgisayar başında çalışırken ideal göz-ekran mesafesi yaklaşık ne kadar olmalıdır?", options: ["10-20 cm", "50-70 cm", "1.5 metre", "5 cm"], correct: 1 }
+          ]
+        },
+        {
+          week: 2,
+          title: "Bilgisayar Sistemleri: Donanım ve Yazılım",
+          subTitle: "Giriş, Çıkış, Depolama birimleri ve İşlemci mimarisi",
+          summary: "Bilgisayar iki ana unsurdan oluşur: Elle tutulup gözle görülen parçalar 'Donanım', bilgisayara ne yapacağını söyleyen komutlar ise 'Yazılım'dır. İşlemci (CPU) bilgisayarın beyni, RAM çalışma masası, SSD ise kütüphanesidir.",
+          concepts: [
+            { name: "CPU (İşlemci)", desc: "Milyarlarca matematiksel komutu yöneten beyin." },
+            { name: "Giriş Birimi", desc: "Bilgisayara komut ve veri aktaran birimler (Klavye, Fare)." },
+            { name: "Çıkış Birimi", desc: "Sonuçları kullanıcıya gösteren araçlar (Monitör, Hoparlör)." }
+          ],
+          scenario: "Zeynep mikrofona konuştu (Giriş), bilgisayar sesi işledi ve hoparlörden arkadaşına dinletti (Çıkış).",
+          tip: "RAM geçici bellektir; bilgisayar kapatıldığında içindeki veriler tamamen temizlenir.",
+          quiz: [
+            { q: "Bilgisayarın tüm işlem ve hesaplamalarını yapan merkezî donanım hangisidir?", options: ["Sabit Disk", "İşlemci (CPU)", "Kasa", "Ekran Kartı"], correct: 1 },
+            { q: "Hangisi bilgisayara dışarıdan veri aktaran bir GİRİŞ birimidir?", options: ["Monitör", "Klavye", "Hoparlör", "Yazıcı"], correct: 1 },
+            { q: "Bilgisayar açıkken çalışan programları geçici olarak hafızasında tutan parça hangisidir?", options: ["RAM", "SSD", "Flash Bellek", "CD-ROM"], correct: 0 }
+          ]
+        },
+        {
+          week: 3,
+          title: "Dosya Yönetimi, Uzantılar ve Bulut Depolama",
+          subTitle: "Hiyerarşik klasör düzeni ve güvenli veri saklama",
+          summary: "Bilgisayardaki her belgenin adı ve türünü belirten noktadan sonraki uzantısı (.docx, .jpg, .mp3) vardır. Dosyaları düzenli tutmak için klasörler kullanılır. Bulut depolama ise dosyalara internet olan her yerden erişim sağlar.",
+          concepts: [
+            { name: "Dosya Uzantısı", desc: "Dosyanın tipini belirten 3-4 harfli kod." },
+            { name: "Klasör (Folder)", desc: "Dosyaları kategorilere ayıran dijital zarf." },
+            { name: "Bulut Depolama", desc: "Verileri internet sunucularında güvenle saklama." }
+          ],
+          scenario: "Ahmet hazırladığı sunumu bulut sürücüsüne yükleyerek okula flash bellek taşımadan akıllı tahtada açabildi.",
+          tip: "Dosya isimlerinde '?, *, :, <, >' gibi semboller kullanılamaz.",
+          quiz: [
+            { q: "Fotoğraf ve resim belgeleri genellikle hangi uzantıya sahiptir?", options: [".mp3", ".jpg / .png", ".docx", ".exe"], correct: 1 },
+            { q: "Büyük boyutlu dosyaları küçültüp tek bir paket yapmak için hangi format kullanılır?", options: [".zip / .rar", ".txt", ".mp4", ".html"], correct: 0 },
+            { q: "Dosyaları fiziksel disk yerine internet üzerinden saklama teknolojisine ne denir?", options: ["Bulut Depolama", "Ekran Koruyucu", "Güvenlik Duvarı", "BIOS"], correct: 0 }
+          ]
+        },
+        {
+          week: 4,
+          title: "Dijital Yurttaşlık ve Siber Güvenlik",
+          subTitle: "Netiket, dijital ayak izi ve güçlü parola kuralları",
+          summary: "İnternette yaptığımız her arama ve paylaşım kalıcı bir 'Dijital Ayak İzi' bırakır. Dijital yurttaş; başkalarının haklarına saygılı, siber zorbalıktan uzak duran ve kişisel verilerini kimseyle paylaşmayan bilinçli bireydir.",
+          concepts: [
+            { name: "Dijital Ayak İzi", desc: "İnternette arkamızda bıraktığımız kalıcı kayıtlar." },
+            { name: "Netiket", desc: "İnternet ortamındaki nezaket ve görgü kuralları." },
+            { name: "Güçlü Parola", desc: "Harf, rakam ve sembol içeren en az 8-10 karakterli şifre." }
+          ],
+          scenario: "Elif, oyun platformunda arkadaşına kızsa bile büyük harflerle bağırmadan nezaket kurallarına uygun mesaj yazdı.",
+          tip: "Asla şifre olarak doğum tarihinizi veya '123456' gibi kolay tahmin edilen dizilimleri kullanmayın.",
+          quiz: [
+            { q: "Hangisi en güçlü parola örneğidir?", options: ["12345678", "ahmet2014", "B!l!s!m#2026*", "galatasaray"], correct: 2 },
+            { q: "İnternette bir kişiye hakaret etmek veya küçük düşürücü sözler söylemek ne olarak adlandırılır?", options: ["Siber Zorbalık", "Netiket", "Açık Kaynak", "Veri Madenciliği"], correct: 0 },
+            { q: "İnternette tamamen BÜYÜK HARFLERLE yazmak ne anlama gelir?", options: ["Kibar konuşmak", "Bağırmak ve kaba davranmak", "Fısıldamak", "Gülümsemek"], correct: 1 }
+          ]
+        },
+        {
+          week: 5,
+          title: "İletişim, Araştırma ve İş Birliği Araçları",
+          subTitle: "Arama motoru teknikleri ve güvenilir bilgiye ulaşma",
+          summary: "İnternetteki her bilgi doğru değildir. Bilgiye ulaşırken güvenilir (.edu, .gov, .org) kaynakları tercih etmeli, tırnak işareti (\" \") kullanarak tam arama yapmalı ve telif haklarına dikkat etmeliyiz.",
+          concepts: [
+            { name: "Arama Motoru", desc: "Milyarlarca web sayfasını tarayıp getiren sistem." },
+            { name: "Doğrulama (Fact-Check)", desc: "Bulunan bilginin en az 2-3 farklı kaynaktan teyit edilmesi." },
+            { name: "E-Posta", desc: "Dijital mektup ve belge gönderme sistemi." }
+          ],
+          scenario: "Ömer fen ödevi için sadece ilk bulduğu blog yazısına güvenmeyip üniversite ve resmi kurum kaynaklarını karşılaştırdı.",
+          tip: "Arama yaparken aradığın cümleyi tırnak içine alırsan kelimeleri tam o sırayla arar.",
+          quiz: [
+            { q: "Devlet kurumlarına ait güvenilir web siteleri hangi alan adı uzantısına sahiptir?", options: [".com", ".gov.tr", ".net", ".xyz"], correct: 1 },
+            { q: "Üniversite ve yükseköğretim kurumlarının web siteleri hangi uzantıyı kullanır?", options: [".edu.tr", ".biz", ".org", ".tv"], correct: 0 },
+            { q: "İnternette bulduğumuz bir görseli ödevde kullanırken neye dikkat etmeliyiz?", options: ["Telif hakkına ve kaynağı belirtmeye", "Görseli kırpmaya", "İsmini silmeye", "Hiçbirine"], correct: 0 }
+          ]
+        },
+        {
+          week: 6,
+          title: "Algoritmik Düşünme ve Problem Çözme",
+          subTitle: "Girdi, Süreç, Çıktı ve adımlama mantığı",
+          summary: "Algoritma; belirli bir problemi çözmek için baştan sona tasarlanmış mantıklı, sıralı ve kesin adımlar zinciridir. Her algoritma 'BAŞLA' ile başlar, adımlar sırayla yürütülür ve 'BİTİR' ile sonuçlanır.",
+          concepts: [
+            { name: "Algoritma", desc: "Bir amaca ulaşmak için adım adım yazılan plan." },
+            { name: "Hata Ayıklama (Debug)", desc: "Algoritmadaki mantık hatalarını bulup düzeltme." },
+            { name: "Sıralama", desc: "Adımların doğru mantıksal sırayla dizilmesi." }
+          ],
+          scenario: "Limonata yapma algoritması: 1- Suyu bardağa dök, 2- Limon sık, 3- Şeker ekle ve karıştır.",
+          tip: "Algoritma adımlarında belirsizlik olamaz. 'Biraz su koy' yerine '1 bardak su koy' denmelidir.",
+          quiz: [
+            { q: "Bir algoritmanın ilk ve son adımı daima nasıl olmalıdır?", options: ["BAŞLA ve BİTİR", "KAYDET ve ÇIK", "AÇ ve KAPA", "OKU ve YAZ"], correct: 0 },
+            { q: "Bir algoritmadaki hataları tespit edip düzeltme işlemine ne ad verilir?", options: ["Hata Ayıklama (Debugging)", "Sıkıştırma", "Formatlama", "Kopyalama"], correct: 0 },
+            { q: "Aşağıdakilerden hangisi net bir algoritma adımı olamaz?", options: ["2 adım ileri git", "Kırmızı ışıkta bekle", "Orada biraz eğlen", "Fırını 180 dereceye ayarla"], correct: 2 }
+          ]
+        },
+        {
+          week: 7,
+          title: "Blok Tabanlı Kodlama Temelleri",
+          subTitle: "Scratch arayüzü, sahneler, kuklalar ve olay blokları",
+          summary: "Blok tabanlı kodlama; kod satırları yazmak yerine lego parçalarına benzeyen blokları birbirine takarak oyun ve animasyon oluşturmayı sağlar. 'Yeşil Bayrak Tıklandığında' gibi olay blokları programı başlatır.",
+          concepts: [
+            { name: "Kukla (Sprite)", desc: "Sahnede hareket eden karakterler ve nesneler." },
+            { name: "Sahne (Backdrop)", desc: "Oyunun geçtiği arka plan ortamı." },
+            { name: "Olay Bloğu", desc: "Kodların ne zaman çalışacağını tetikleyen sarı blok." }
+          ],
+          scenario: "Murat, boşluk tuşuna basıldığında zıplayan bir kedi animasyonu tasarladı.",
+          tip: "Kuklanın sahnede nereye gideceğini X (yatay) ve Y (dikey) koordinatları belirler.",
+          quiz: [
+            { q: "Scratch programında kodları başlatmak için en çok hangi simgeye tıklanır?", options: ["Kırmızı Daire", "Yeşil Bayrak", "Mavi Üçgen", "Sarı Yıldız"], correct: 1 },
+            { q: "Sahnede hareket eden karakter ve nesnelere ne ad verilir?", options: ["Kukla (Sprite)", "Piksel", "RAM", "Uzantı"], correct: 0 },
+            { q: "Kuklanın ekranda sağa-sola yatay hareketini hangi koordinat temsil eder?", options: ["X Koordinatı", "Y Koordinatı", "Z Koordinatı", "W Koordinatı"], correct: 0 }
+          ]
+        },
+        {
+          week: 8,
+          title: "Döngüler ve Karar Yapıları (5. Sınıf)",
+          subTitle: "Tekrarlayan işlemler ve Eğer-Değilse mantığı",
+          summary: "Bir komutu 10 defa alt alta yazmak yerine '10 Defa Tekrarla' döngü bloğu kullanılır. Şarta bağlı durumlarda ise 'Eğer - Değilse' bloğu devreye girer. Karakter duvara çarptı mı? Evet ise geri dön, değilse ilerle.",
+          concepts: [
+            { name: "Döngü (Loop)", desc: "Komutları belirtilen sayıda art arda çalıştıran yapı." },
+            { name: "Eğer (If)", desc: "Şart doğruysa içindeki kodları çalıştıran karar bloğu." },
+            { name: "Sürekli Tekrarla", desc: "Program durdurulana kadar hiç durmadan çalışan döngü." }
+          ],
+          scenario: "Oyun kuralı: 'Eğer can = 0 ise Oyunu Durdur, değilse oyuna devam et'.",
+          tip: "Döngüler kodların daha kısa, anlaşılır ve hatasız olmasını sağlar.",
+          quiz: [
+            { q: "Aynı komutu 20 kez tekrarlatmak için hangi blok kategorisi kullanılır?", options: ["Kontrol (Döngü)", "Görünüm", "Ses", "Algılama"], correct: 0 },
+            { q: "Karakterin oyun boyunca durmadan ekranda devriye gezmesi için hangi döngü seçilir?", options: ["10 Defa Tekrarla", "Sürekli Tekrarla", "1 Defa Çalıştır", "Durdur"], correct: 1 },
+            { q: "'Eğer tuşa basıldıysa' yapısı ne tür bir programlama mantığıdır?", options: ["Karar (Koşul) Yapısı", "Yedekleme", "Depolama", "Çıkış Birimi"], correct: 0 }
+          ]
+        }
+      ],
+      grade6: [
+        {
+          week: 1,
+          title: "Dijital Güvenlik ve Zararlı Yazılımlar",
+          subTitle: "Virüsler, Truva atları, fidye yazılımları ve antivirüsler",
+          summary: "Zararlı yazılımlar (Malware); kullanıcının izni olmadan sisteme sızıp dosyalara zarar veren veya bilgileri çalan programlardır. Truva atları masum bir oyun gibi görünürken, fidye yazılımları (Ransomware) dosyaları şifreleyerek para talep eder.",
+          concepts: [
+            { name: "Malware", desc: "Tüm zararlı yazılımların genel adıdır." },
+            { name: "Truva Atı (Trojan)", desc: "Faydalı bir program süsü verilmiş sinsi virüs." },
+            { name: "Antivirüs", desc: "Zararlıları tespit edip bilgisayardan temizleyen güvenlik yazılımı." }
+          ],
+          scenario: "Kemal, korsan oyun sitesinden dosya indirmek yerine resmi mağazayı kullanarak bilgisayarına Truva atı bulaşmasını engelledi.",
+          tip: "İşletim sisteminizi ve antivirüs yazılımınızı düzenli olarak güncellemek güvenliğin ilk şartıdır.",
+          quiz: [
+            { q: "Kullanıcı dosyalarını şifreleyip açmak için para talep eden zararlı yazılım hangisidir?", options: ["Fidye Yazılımı (Ransomware)", "Solucan", "İşletim Sistemi", "Açık Kaynak"], correct: 0 },
+            { q: "Masum bir oyun veya dosya gibi görünüp arka planda sisteme sızan virüse ne denir?", options: ["Truva Atı (Trojan)", "Modem", "RAM", "Klavye"], correct: 0 },
+            { q: "Bilgisayarı virüslerden korumak için hangisi YAPILMAMALIDIR?", options: ["Bilinmeyen e-posta eklerini açmak", "Antivirüs kullanmak", "Güncellemeleri yapmak", "Güçlü şifre koymak"], correct: 0 }
+          ]
+        },
+        {
+          week: 2,
+          title: "Bilgisayar Ağları ve İnternet Protokolleri",
+          subTitle: "LAN, WAN, IP Adresi, DNS ve Veri Paketleri",
+          summary: "Bilgisayarların bilgi ve donanım paylaşmak için birbirine bağlanmasına ağ denir. Okul laboratuvarı Yerel Ağ (LAN), tüm dünyayı saran internet ise Geniş Ağ (WAN) örneğidir. Her cihazın internette benzersiz bir IP adresi bulunur.",
+          concepts: [
+            { name: "LAN (Yerel Ağ)", desc: "Küçük bir bina veya odayı kapsayan ağ." },
+            { name: "WAN (Geniş Ağ)", desc: "Şehirleri ve kıtaları birbirine bağlayan devasa ağ." },
+            { name: "IP Adresi", desc: "Ağdaki cihazların kimlik numarası (Örn: 192.168.1.1)." }
+          ],
+          scenario: "Bilişim sınıfındaki 25 öğrenci, tek bir ağ yazıcısına LAN üzerinden bağlanıp çıktı aldı.",
+          tip: "DNS sistemi; insanların aklında tutamadığı karmaşık IP adreslerini 'meb.gov.tr' gibi alan adlarına çevirir.",
+          quiz: [
+            { q: "Bir okul binasındaki bilgisayarları birbirine bağlayan ağ türü hangisidir?", options: ["LAN (Yerel Ağ)", "WAN (Geniş Ağ)", "Bluetooth", "SAN"], correct: 0 },
+            { q: "Dünyanın en büyük geniş alan ağı (WAN) hangisidir?", options: ["İnternet", "Okul Ağı", "Ev Wi-Fi", "Hücresel Veri"], correct: 0 },
+            { q: "İnternete bağlı her cihaza verilen özel sayısal kimlik adresine ne denir?", options: ["IP Adresi", "E-posta", "MAC Şifresi", "Barkod"], correct: 0 }
+          ]
+        },
+        {
+          week: 3,
+          title: "Bilişim Hukuku, Telif Hakları ve Açık Kaynak",
+          subTitle: "Fikri mülkiyet, lisans türleri ve milli işletim sistemimiz Pardus",
+          summary: "Bir kişinin emeğiyle oluşturduğu müzik, yazılım veya kitap yasal olarak telif hakkıyla korunur. Korsan yazılım kullanmak hem yasalara aykırıdır hem de virüs riskidir. PARDUS, TÜBİTAK tarafından geliştirilen açık kaynaklı milli işletim sistemimizdir.",
+          concepts: [
+            { name: "Telif Hakkı (©)", desc: "Eser sahibinin haklarını koruyan yasal güvence." },
+            { name: "Açık Kaynak Kod", desc: "Kodları herkes tarafından incelenip geliştirilebilen yazılım." },
+            { name: "PARDUS", desc: "Türkiye'nin güvenli ve yerli Linux işletim sistemi." }
+          ],
+          scenario: "Okul kütüphanesindeki bilgisayarlara yerli işletim sistemi PARDUS kurularak hem tasarruf sağlandı hem de siber güvenlik artırıldı.",
+          tip: "Creative Commons lisanslı içerikleri kaynak göstererek yasal ve ücretsiz bir şekilde projelerinizde kullanabilirsiniz.",
+          quiz: [
+            { q: "TÜBİTAK tarafından geliştirilen milli işletim sistemimizin adı nedir?", options: ["PARDUS", "Windows", "MacOS", "Android"], correct: 0 },
+            { q: "Kaynak kodları herkese açık olan ve ücretsiz geliştirilebilen yazılımlara ne denir?", options: ["Açık Kaynak Kodlu", "Korsan Yazılım", "Demo Yazılım", "Kapalı Kutu"], correct: 0 },
+            { q: "Telif hakkı bulunan bir yazılımı izinsiz kopyalayıp dağıtmaya ne denir?", options: ["Korsan Yazılım Kullanımı", "Yedekleme", "Arşivleme", "Lisanslama"], correct: 0 }
+          ]
+        },
+        {
+          week: 4,
+          title: "İleri Algoritma Tasarımı ve Akış Şemaları",
+          subTitle: "Geometrik sembollerle algoritmaların görselleştirilmesi",
+          summary: "Algoritmaların standart geometrik şekillerle çizilmesine 'Akış Şeması' denir. Elips başla/bitir, paralelkenar veri girişi, dikdörtgen işlem adımları, eşkenar dörtgen (baklava) ise karar vermek (Eğer) için kullanılır.",
+          concepts: [
+            { name: "Akış Şeması", desc: "Algoritmanın şekillerle görselleştirilmiş hali." },
+            { name: "Eşkenar Dörtgen", desc: "Karar verme adımı (Hava soğuk mu? Evet / Hayır)." },
+            { name: "Dikdörtgen", desc: "Hesaplama ve eylem adımı (Puanı 1 artır)." }
+          ],
+          scenario: "Trafik lambası akış şeması: 'Kırmızı mı yandı? Evet ise Dur, Hayır ise Geç'.",
+          tip: "Akış şemasındaki oklar veri ve komutların yönünü gösterir; asla ok çizimi atlanmamalıdır.",
+          quiz: [
+            { q: "Akış şemalarında 'Karar Verme' (Koşul) adımı hangi şekille temsil edilir?", options: ["Eşkenar Dörtgen (Baklava)", "Dikdörtgen", "Elips", "Daire"], correct: 0 },
+            { q: "Akış şemasının BAŞLA ve BİTİR adımları hangi geometrik şekille gösterilir?", options: ["Elips / Oval", "Kare", "Üçgen", "Yamuk"], correct: 0 },
+            { q: "Bir matematiksel hesaplama veya işlem adımı akış şemasında hangi şeklin içine yazılır?", options: ["Dikdörtgen", "Baklava Dilimi", "Daire", "Yıldız"], correct: 0 }
+          ]
+        },
+        {
+          week: 5,
+          title: "Kodlamada Değişkenler ve Mantıksal Operatörler",
+          subTitle: "Sayısal, metin ve mantıksal verilerle hesaplama",
+          summary: "Değişken; bilgisayar hafızasında veri saklayan ve program akışında değeri değişebilen etiketli kutulardır (Örn: Skor, Süre, Can). Mantıksal operatörler (VE, VEYA, DEĞİL) ise birden fazla şartı birleştirmemizi sağlar.",
+          concepts: [
+            { name: "Değişken (Variable)", desc: "Değeri değişebilen verileri saklayan hafıza alanı." },
+            { name: "VE (AND) Operatörü", desc: "Her iki şartın da aynı anda DOĞRU olmasını ister." },
+            { name: "VEYA (OR) Operatörü", desc: "Şartlardan sadece birinin doğru olması yeterlidir." }
+          ],
+          scenario: "Oyunda kapının açılma şartı: 'Anahtar = Var VE Puan >= 50'.",
+          tip: "Değişken isimlerinde Türkçe karakter veya boşluk kullanmamak iyi bir kodlama alışkanlığıdır.",
+          quiz: [
+            { q: "Bir oyunda oyuncunun puanını veya kalan canını saklamak için hangisi kullanılır?", options: ["Değişken (Variable)", "Monitör", "Sabit Disk", "Kasa"], correct: 0 },
+            { q: "Kapının açılması için 'Anahtar = Var VE Şifre = Doğru' kuralında anahtar olup şifre yanlışsa kapı açılır mı?", options: ["Hayır, çünkü VE kuralında ikisi de doğru olmalı", "Evet açılır", "Bazen", "Kapı bozulur"], correct: 0 },
+            { q: "Sadece DOĞRU (True) veya YANLIŞ (False) değerlerini alan veri tipi hangisidir?", options: ["Mantıksal (Boolean)", "Metin (String)", "Sayısal (Integer)", "Ondalık"], correct: 0 }
+          ]
+        },
+        {
+          week: 6,
+          title: "Kendi Oyunumu Tasarlıyorum: Olaylar ve Etkileşim",
+          subTitle: "Karakter çarpışmaları, puan sistemi ve sahne geçişleri",
+          summary: "Scratch ile tam fonksiyonel bir oyun yaparken karakterlerin birbirine değmesi 'Algılama' bloklarıyla kontrol edilir. 'Eğer fareye değdi mi?' veya 'Eğer renge değdi mi?' koşullarıyla puan artırılır ya da oyun sonlandırılır.",
+          concepts: [
+            { name: "Çarpışma Algılama", desc: "İki kuklanın birbirine temas anını tespit etme." },
+            { name: "Haber Salma (Broadcast)", desc: "Kuklaların birbiriyle mesajlaşarak senkronize olması." },
+            { name: "Skor Tablosu", desc: "Toplanan elmalarla artan değişken sayacı." }
+          ],
+          scenario: "Karakter kırmızı engellere çarptığında 'Canı 1 Azalt' komutu çalışır ve can sıfırlandığında 'Oyun Bitti' sahnesine geçilir.",
+          tip: "Kuklalar arasında haberleşme için 'Haber Sal' bloğu kullanılarak ortak hareket başlatılabilir.",
+          quiz: [
+            { q: "Scratch'te bir kuklanın başka bir kuklaya dokunduğunu hangi blok grubuyla anlarız?", options: ["Algılama", "Ses", "Kalem", "Görünüm"], correct: 0 },
+            { q: "Bir kuklanın diğer tüm kuklalara bir olayı haber vermesini sağlayan komut hangisidir?", options: ["Haber Sal (Broadcast)", "Durdur", "Gizle", "Tekrarla"], correct: 0 },
+            { q: "Karakter her elma topladığında skorun 5 artması için hangi komut kullanılır?", options: ["Skor değişkenini 5 değiştir", "Skor değişkenini 0 yap", "Skor değişkenini sil", "Skoru gizle"], correct: 0 }
+          ]
+        },
+        {
+          week: 7,
+          title: "Yapay Zeka Kavramı, Makine Öğrenmesi ve Veri",
+          subTitle: "Yapay zekanın çalışma mantığı, model eğitimi ve etik",
+          summary: "Yapay Zeka (AI); bilgisayarların insan gibi öğrenmesini, görsel tanımasını ve mantık yürütmesini sağlayan algoritmalar bütünüdür. Makineler verilerden öğrenir. Veri ne kadar kaliteli olursa yapay zeka o kadar doğru karar verir.",
+          concepts: [
+            { name: "Makine Öğrenmesi", desc: "Bilgisayarların deneyim ve verilerle kendi kendine öğrenmesi." },
+            { name: "Eğitim Verisi", desc: "Yapay zekanın nesneleri ayırt etmesi için gösterilen örnekler." },
+            { name: "Yapay Zeka Etiği", desc: "Yapay zekanın insan haklarına saygılı ve adil tasarlanması." }
+          ],
+          scenario: "Akıllı telefon kamerasının insan yüzünü tanıyıp otomatik odaklanması bir yapay zeka modelidir.",
+          tip: "Yapay zekaya yanlış veya eksik veri verilirse, üreteceği sonuçlar da yanıltıcı olur.",
+          quiz: [
+            { q: "Yapay zekanın kedi ve köpekleri ayırt edebilmesi için neye ihtiyacı vardır?", options: ["Binlerce kedi ve köpek fotoğraflarından oluşan eğitim verisine", "Sadece bir fareye", "Renkli yazıcıya", "Hızlı bir klavyeye"], correct: 0 },
+            { q: "Bilgisayarların verilerden öğrenerek problem çözme yeteneğine ne ad verilir?", options: ["Yapay Zeka / Makine Öğrenmesi", "Anakart", "Ekran Koruyucu", "IP Adresi"], correct: 0 },
+            { q: "Yapay zekanın insanlar arasında ayrımcılık yapmadan adil çalışmasını savunan ilkelere ne denir?", options: ["Yapay Zeka Etiği", "Telif Hakkı", "Netiket", "Ağ Protokolü"], correct: 0 }
+          ]
+        },
+        {
+          week: 8,
+          title: "Yenilikçi Teknolojiler, Nesnelerin İnterneti (IoT) ve Robotik",
+          subTitle: "Sensörler, akıllı cihazlar ve geleceğin meslekleri",
+          summary: "Fiziksel cihazların internete bağlanarak birbirleriyle veri paylaşmasına 'Nesnelerin İnterneti (IoT)' denir. Sensörler robotların gözü ve kulağıdır. Mesafe sensörü engelleri, ışık sensörü ise karanlığı algılar.",
+          concepts: [
+            { name: "Nesnelerin İnterneti (IoT)", desc: "Akıllı saat, ev ve robotların internete bağlanması." },
+            { name: "Sensör (Algılayıcı)", desc: "Isı, ışık, mesafe gibi fiziksel dünyayı ölçen organ." },
+            { name: "Mikrodenetleyici", desc: "Sensörlerden gelen verileri işleyen küçük robot beyni." }
+          ],
+          scenario: "Sokak lambalarının hava karardığında ışık sensörü sayesinde otomatik olarak yanması bir IoT sistemidir.",
+          tip: "Robotik kodlama; mekanik parçaları, elektronik devreleri ve yazılım mantığını birleştiren harika bir alandır.",
+          quiz: [
+            { q: "Robot süpürgelerin veya akıllı cihazların internet üzerinden haberleşmesine ne ad verilir?", options: ["Nesnelerin İnterneti (IoT)", "Korsan Yazılım", "Bulut Klasörü", "Sistem Geri Yükleme"], correct: 0 },
+            { q: "Bir robotun önündeki duvara çarpmaması için hangi sensör kullanılır?", options: ["Mesafe Sensörü", "Mikrofon", "Nem Sensörü", "Hoparlör"], correct: 0 },
+            { q: "Robotların çevrelerindeki ışık miktarını ölçen elektronik bileşen hangisidir?", options: ["Işık (LDR) Sensörü", "İşlemci", "RAM", "Sabit Disk"], correct: 0 }
+          ]
+        }
+      ]
+    };
+
+    // Dictionary Data
+    const dictionaryItems = [
+      { term: "İşlemci (CPU)", cat: "donanim", desc: "Bilgisayarın tüm hesaplama ve komutlarını yürüten merkezî beyin birimidir." },
+      { term: "RAM Bellek", cat: "donanim", desc: "Bilgisayar açıkken çalışan programların verilerini tutan geçici çalışma belleğidir." },
+      { term: "SSD / Sabit Disk", cat: "donanim", desc: "Dosya, fotoğraf ve işletim sistemini kalıcı olarak saklayan depolama birimidir." },
+      { term: "PARDUS", cat: "yazilim", desc: "TÜBİTAK tarafından geliştirilen açık kaynaklı, milli ve güvenli Linux işletim sistemimizdir." },
+      { term: "İşletim Sistemi", cat: "yazilim", desc: "Donanım parçaları ile uygulama yazılımları arasındaki iletişimi sağlayan ana sistemdir." },
+      { term: "Oltalama (Phishing)", cat: "guvenlik", desc: "Sahte e-posta veya bağlantılarla kullanıcıların hesap şifrelerini çalmayı amaçlayan siber tuzaktır." },
+      { term: "İki Adımlı Doğrulama (2FA)", cat: "guvenlik", desc: "Şifreye ek olarak telefona gelen onay kodu ile hesabı iki kat koruyan güvenlik katmanıdır." },
+      { term: "Algoritma", cat: "kodlama", desc: "Bir problemi çözmek için başından sonuna kadar tasarlanan sıralı ve mantıksal adımlar bütünüdür." },
+      { term: "Değişken (Variable)", cat: "kodlama", desc: "Program çalıştıkça skoru veya süreyi hafızada tutan ve değeri değişebilen etiketli alandır." },
+      { term: "Döngü (Loop)", cat: "kodlama", desc: "Belirli komutları istenen sayıda veya sürekli olarak art arda çalıştıran kontrol yapısıdır." },
+      { term: "IP Adresi", cat: "ag", desc: "Ağa bağlanan her cihaza verilen ve cihazların birbirini bulmasını sağlayan sayısal kimliktir." },
+      { term: "IoT (Nesnelerin İnterneti)", cat: "ag", desc: "Fiziksel cihazların, sensörlerin ve akıllı ev aletlerinin internet üzerinden haberleşmesidir." }
+    ];
+
+    // ==============================================================
+    // 3. APPLICATION STATE & GAMIFICATION
+    // ==============================================================
+    let appState = {
+      grade: 5,
+      xp: 0,
+      level: 1,
+      completedWeeks: [],
+      solvedQuizzes: [],
+      badges: {
+        firstQuiz: { name: "Bilişim Çırağı", desc: "İlk ders testini başarıyla tamamladın.", icon: "award", unlocked: false },
+        shieldHero: { name: "Siber Muhafız", desc: "Siber Kalkan oyununda 5 doğru karar verdin.", icon: "shield-check", unlocked: false },
+        sorterPro: { name: "Donanım Uzmanı", desc: "Donanım sınıflandırıcıda 7 bileşeni doğru ayırdın.", icon: "cpu", unlocked: false },
+        robotMaster: { name: "Algoritma Mimarı", desc: "Robotu hedef çipe ulaştırdın.", icon: "bot", unlocked: false },
+        levelUpBadge: { name: "Teknoloji Lideri", desc: "Seviye 2'ye ulaştın.", icon: "zap", unlocked: false },
+        tyymExpert: { name: "TYMM Dehası", desc: "5 farklı ders haftasını öğrendin.", icon: "sparkles", unlocked: false }
+      }
+    };
+
+    function addXP(amount, reason = "") {
+      appState.xp += amount;
+      const nextThreshold = appState.level * 80;
+
+      if (appState.xp >= nextThreshold) {
+        appState.level++;
+        appState.xp = appState.xp - nextThreshold;
+        audioSynth.playFanfare();
+        showToast(`🎉 SEVİYE ATLADIN: Seviye ${appState.level}!`);
+        unlockBadge('levelUpBadge');
+      }
+
+      updateMetricsUI();
+    }
+
+    function unlockBadge(key) {
+      if (appState.badges[key] && !appState.badges[key].unlocked) {
+        appState.badges[key].unlocked = true;
+        audioSynth.playFanfare();
+        showToast(`🏆 YENİ ROZET KAZANILDI: ${appState.badges[key].name}!`);
+        updateMetricsUI();
+      }
+    }
+
+    function updateMetricsUI() {
+      const titles = ["Bilişim Çırağı", "Siber Muhafız", "Kodlama Kaşifi", "Sistem Mimarı", "Bilişim Uzmanı"];
+      const title = titles[Math.min(titles.length - 1, appState.level - 1)];
+
+      document.getElementById('top-level-badge').innerText = `L${appState.level}`;
+      document.getElementById('top-role-label').innerText = title;
+      document.getElementById('top-xp-val').innerText = `${appState.xp} XP`;
+
+      // Stats section
+      document.getElementById('stat-completed').innerText = `${appState.completedWeeks.length} / 16`;
+      document.getElementById('stat-xp').innerText = `${(appState.level - 1) * 80 + appState.xp} XP`;
+      document.getElementById('stat-quiz-count').innerText = `${appState.solvedQuizzes.length} Adet`;
+
+      const unlockedBadges = Object.values(appState.badges).filter(b => b.unlocked).length;
+      document.getElementById('stat-badge-count').innerText = `${unlockedBadges} / 6`;
+    }
+
+    // ==============================================================
+    // 4. CURRICULUM RENDERING & SEARCH
+    // ==============================================================
+    function setGrade(gradeNum) {
+      appState.grade = gradeNum;
+      audioSynth.playChime();
+
+      const btn5 = document.getElementById('btn-grade-5');
+      const btn6 = document.getElementById('btn-grade-6');
+      const icon5 = document.getElementById('icon-g5');
+      const icon6 = document.getElementById('icon-g6');
+
+      if (gradeNum === 5) {
+        btn5.className = "grade-pill py-2.5 px-4 rounded-xl bg-brand-600 text-white font-extrabold shadow-sm transition text-center flex items-center justify-center gap-1.5";
+        btn6.className = "grade-pill py-2.5 px-4 rounded-xl text-slate-600 hover:text-brand-700 transition text-center flex items-center justify-center gap-1.5";
+        icon5.setAttribute('data-lucide', 'check');
+        icon5.className = "w-3.5 h-3.5";
+        icon6.setAttribute('data-lucide', 'circle');
+        icon6.className = "w-3.5 h-3.5 opacity-40";
+      } else {
+        btn6.className = "grade-pill py-2.5 px-4 rounded-xl bg-brand-600 text-white font-extrabold shadow-sm transition text-center flex items-center justify-center gap-1.5";
+        btn5.className = "grade-pill py-2.5 px-4 rounded-xl text-slate-600 hover:text-brand-700 transition text-center flex items-center justify-center gap-1.5";
+        icon6.setAttribute('data-lucide', 'check');
+        icon6.className = "w-3.5 h-3.5";
+        icon5.setAttribute('data-lucide', 'circle');
+        icon5.className = "w-3.5 h-3.5 opacity-40";
+      }
+
+      renderCurriculum();
+      lucide.createIcons();
+    }
+
+    function renderCurriculum(filterQuery = "") {
+      const container = document.getElementById('curriculum-cards-container');
+      const weeks = tymmCurriculum[`grade${appState.grade}`];
+
+      const filtered = weeks.filter(item => {
+        const fullContent = (item.title + item.subTitle + item.summary + item.scenario + item.tip).toLowerCase();
+        return fullContent.includes(filterQuery.toLowerCase());
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200">
+            <i data-lucide="search-x" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+            <h4 class="text-sm font-bold text-slate-800">Aramanıza uygun ders konusu bulunamadı.</h4>
+            <p class="text-xs text-slate-500 mt-1">Farklı bir kelime aramayı deneyebilirsiniz.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const key = `g${appState.grade}_w${item.week}`;
+        const isDone = appState.completedWeeks.includes(key);
+
+        return `
+          <div class="app-card p-4 sm:p-5 flex flex-col justify-between ${isDone ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'}">
+            <div class="space-y-3.5">
+              <!-- Header Badges -->
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-xl bg-brand-100 text-brand-800 text-[11px] font-extrabold font-mono">
+                  ${appState.grade}. Sınıf • ${item.week}. Hafta
+                </span>
+                ${isDone ? `
+                  <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold flex items-center gap-1 border border-emerald-200">
+                    <i data-lucide="check" class="w-3 h-3"></i> Tamamlandı
+                  </span>
+                ` : ''}
+              </div>
+
+              <!-- Titles -->
+              <div>
+                <h3 class="text-base sm:text-lg font-outfit font-extrabold text-slate-900 leading-snug">${item.title}</h3>
+                <p class="text-xs text-brand-700 font-semibold mt-0.5">${item.subTitle}</p>
+              </div>
+
+              <!-- Summary -->
+              <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                ${item.summary}
+              </p>
+
+              <!-- 3 Concepts -->
+              <div class="space-y-1.5">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">3 Temel Kavram</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+                  ${item.concepts.map(c => `
+                    <div class="p-2 rounded-xl bg-white border border-slate-200 text-[11px]">
+                      <span class="font-bold text-slate-900 block">${c.name}</span>
+                      <span class="text-slate-500 text-[10px] line-clamp-2 mt-0.5">${c.desc}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Daily Life Scenario & Pro Tip -->
+              <div class="space-y-2 text-[11px]">
+                <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 flex items-start gap-2">
+                  <i data-lucide="lightbulb" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+                  <div><strong class="block">Yaşam Senaryosu:</strong> ${item.scenario}</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-sky-50/70 border border-sky-200 text-sky-900 flex items-start gap-2">
+                  <i data-lucide="info" class="w-4 h-4 text-sky-600 shrink-0 mt-0.5"></i>
+                  <div><strong class="block">Püf Noktası:</strong> ${item.tip}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quiz CTA Button -->
+            <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-medium">3 Soruluk Mini Test</span>
+              <button onclick="openQuizModal(${appState.grade}, ${item.week})" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-sm transition">
+                <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
+                <span>Testi Çöz (+30 XP)</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('search-input').value;
+      renderCurriculum(q);
+    }
+
+    // ==============================================================
+    // 5. QUIZ LOGIC & MODAL
+    // ==============================================================
+    let activeQuiz = { grade: 5, week: 1, answers: [-1, -1, -1] };
+
+    function openQuizModal(grade, week) {
+      activeQuiz.grade = grade;
+      activeQuiz.week = week;
+      activeQuiz.answers = [-1, -1, -1];
+
+      const item = tymmCurriculum[`grade${grade}`].find(w => w.week === week);
+      if (!item) return;
+
+      document.getElementById('quiz-badge-grade').innerText = `${grade}. Sınıf`;
+      document.getElementById('quiz-badge-title').innerText = `${week}. Hafta Mini Testi: ${item.title}`;
+
+      const body = document.getElementById('quiz-questions-body');
+      body.innerHTML = item.quiz.map((q, qIndex) => `
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+          <div class="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+            ${qIndex + 1}. ${q.q}
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            ${q.options.map((opt, optIndex) => `
+              <button 
+                onclick="chooseOption(${qIndex}, ${optIndex})" 
+                id="opt-${qIndex}-${optIndex}"
+                class="quiz-opt-btn text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-brand-400 text-xs text-slate-700 font-medium transition flex items-center gap-2">
+                <span class="w-5 h-5 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 font-mono">
+                  ${['A', 'B', 'C', 'D'][optIndex]}
+                </span>
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('quiz-warn-text').innerText = "Tüm soruları işaretleyiniz.";
+      document.getElementById('quiz-warn-text').className = "text-xs font-bold text-slate-500";
+      document.getElementById('quiz-modal-sheet').classList.remove('hidden');
+    }
+
+    function chooseOption(qIndex, optIndex) {
+      activeQuiz.answers[qIndex] = optIndex;
+      audioSynth.playChime();
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`opt-${qIndex}-${i}`);
+        if (btn) {
+          btn.className = "quiz-opt-btn text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-brand-400 text-xs text-slate-700 font-medium transition flex items-center gap-2";
+        }
+      }
+      const sel = document.getElementById(`opt-${qIndex}-${optIndex}`);
+      if (sel) {
+        sel.className = "quiz-opt-btn text-left p-2.5 rounded-xl bg-brand-50 border-2 border-brand-600 text-brand-900 font-bold transition flex items-center gap-2";
+      }
+    }
+
+    function verifyQuizSubmission() {
+      if (activeQuiz.answers.includes(-1)) {
+        document.getElementById('quiz-warn-text').innerText = "Lütfen önce tüm soruları cevaplayın!";
+        document.getElementById('quiz-warn-text').className = "text-xs font-bold text-rose-600";
+        audioSynth.playError();
+        return;
+      }
+
+      const item = tymmCurriculum[`grade${activeQuiz.grade}`].find(w => w.week === activeQuiz.week);
+      let correct = 0;
+      item.quiz.forEach((q, idx) => {
+        if (q.correct === activeQuiz.answers[idx]) correct++;
+      });
+
+      const key = `g${activeQuiz.grade}_w${activeQuiz.week}`;
+      if (!appState.completedWeeks.includes(key)) {
+        appState.completedWeeks.push(key);
+      }
+      if (!appState.solvedQuizzes.includes(key)) {
+        appState.solvedQuizzes.push(key);
+      }
+
+      addXP(30, "Test Başarısı");
+      unlockBadge('firstQuiz');
+      if (appState.completedWeeks.length >= 5) unlockBadge('tyymExpert');
+
+      closeQuizModal();
+      renderCurriculum();
+      showToast(`🎯 Test Tamamlandı! 3 sorudan ${correct} doğru yaptın. +30 XP eklendi!`);
+    }
+
+    function closeQuizModal() {
+      document.getElementById('quiz-modal-sheet').classList.add('hidden');
+    }
+
+    // ==============================================================
+    // 6. GAME 1: SİBER GÜVENLİK KALKANI
+    // ==============================================================
+    const shieldDeck = [
+      { text: "Banka veya oyun sitesi görünümünde gelen 'Şifreniz sıfırlandı, acil tıklayın' SMS linkine tıklamak.", isSafe: false, tag: "Kimlik Avı (Oltalama)", exp: "Bu tür acil durum mesajları şifreleri ele geçirmek için tasarlanmış oltalama tuzaklarıdır!" },
+      { text: "Tüm sosyal medya ve okul hesaplarında en az 10 karakterli, büyük/küçük harf ve sembol içeren karmaşık şifreler kullanmak.", isSafe: true, tag: "Parola Güvenliği", exp: "Harika! Karmaşık parolaları kırmak yıllar alabilir." },
+      { text: "İnternette oyun oynarken tanıştığın bir yabancıya telefon numaranı ve ev adresini göndermek.", isSafe: false, tag: "Kişisel Veri", exp: "Kişisel bilgiler gerçek hayatta olduğu gibi sanal dünyada da yabancılarla paylaşılmamalıdır!" },
+      { text: "Hesap güvenliği için İki Adımlı Doğrulamayı (2FA - Telefona gelen SMS kodu) aktif hale getirmek.", isSafe: true, tag: "Hesap Güvenliği", exp: "Şifreniz çalınsa bile telefonunuza gelen onay kodu olmadan hesabınıza girilemez." },
+      { text: "Kafedeki şifresiz halka açık Wi-Fi ağına bağlanıp bankacılık veya alışveriş işlemi yapmak.", isSafe: false, tag: "Ağ Güvenliği", exp: "Şifresiz açık ağlardaki veri trafiğini kötü niyetli kişiler kolayca dinleyebilir." },
+      { text: "İnternetten oyun indirirken resmi uygulama mağazaları (Google Play, Steam, vb.) yerine korsan dosya sitelerini tercih etmek.", isSafe: false, tag: "Zararlı Yazılım", exp: "Korsan oyun dosyalarının içine fidye yazılımları veya Truva atları gizlenebilir!" },
+      { text: "İşletim sistemini ve antivirüs programını düzenli olarak güncel tutmak.", isSafe: true, tag: "Sistem Savunması", exp: "Güncellemeler yeni keşfedilen güvenlik açıklarını kapatarak cihazı korur." }
+    ];
+
+    let shieldState = { idx: 0, score: 0, lives: 3 };
+
+    function loadShieldCard() {
+      if (shieldState.lives <= 0) {
+        document.getElementById('shield-scenario-box').innerHTML = `
+          <div class="space-y-2 py-2">
+            <span class="text-3xl">💔</span>
+            <h4 class="font-outfit font-black text-rose-600 text-lg">Kalkanın Canı Tükendi!</h4>
+            <p class="text-xs text-slate-600">Tekrar deneyerek siber güvenliğini test et.</p>
+            <button onclick="resetShieldGame()" class="px-4 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold shadow-sm">Yeniden Başla</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (shieldState.idx >= shieldDeck.length) {
+        document.getElementById('shield-scenario-box').innerHTML = `
+          <div class="space-y-2 py-2">
+            <span class="text-3xl">🛡️</span>
+            <h4 class="font-outfit font-black text-emerald-600 text-lg">Siber Kalkan Görevi Başarıyla Bitti!</h4>
+            <p class="text-xs text-slate-600">Skorun: <strong>${shieldState.score} Puan</strong></p>
+            <button onclick="resetShieldGame()" class="px-4 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold shadow-sm">Tekrar Oyna</button>
+          </div>
+        `;
+        return;
+      }
+
+      const item = shieldDeck[shieldState.idx];
+      document.getElementById('shield-scenario-box').innerText = `"${item.text}"`;
+      document.getElementById('shield-tag').innerText = item.tag;
+      document.getElementById('shield-feedback-msg').innerText = "";
+    }
+
+    function evaluateShield(userChoice) {
+      if (shieldState.lives <= 0 || shieldState.idx >= shieldDeck.length) return;
+      const item = shieldDeck[shieldState.idx];
+      const msg = document.getElementById('shield-feedback-msg');
+
+      if (userChoice === item.isSafe) {
+        shieldState.score += 10;
+        audioSynth.playChime();
+        addXP(10, "Siber Kalkan Doğru Cevap");
+        msg.className = "text-xs sm:text-sm font-extrabold text-emerald-600";
+        msg.innerText = `✅ DOĞRU! ${item.exp}`;
+        if (shieldState.score >= 50) unlockBadge('shieldHero');
+      } else {
+        shieldState.lives--;
+        audioSynth.playError();
+        msg.className = "text-xs sm:text-sm font-extrabold text-rose-600";
+        msg.innerText = `❌ YANLIŞ! ${item.exp}`;
+      }
+
+      document.getElementById('shield-score').innerText = shieldState.score;
+      document.getElementById('shield-lives').innerText = shieldState.lives;
+
+      shieldState.idx++;
+      setTimeout(loadShieldCard, 1400);
+    }
+
+    function resetShieldGame() {
+      shieldState = { idx: 0, score: 0, lives: 3 };
+      document.getElementById('shield-score').innerText = "0";
+      document.getElementById('shield-lives').innerText = "3";
+      loadShieldCard();
+    }
+
+    // ==============================================================
+    // 7. GAME 2: DONANIM & YAZILIM SINIFLANDIRICI
+    // ==============================================================
+    const sorterPool = [
+      { name: "Klavye", type: "giris", note: "Bilgisayara yazı ve komut giren giriş birimidir." },
+      { name: "Monitör (Ekran)", type: "cikis", note: "Görüntü ve verileri bize aktaran çıkış birimidir." },
+      { name: "SSD (Katı Hal Sürücü)", type: "depolama", note: "Verileri kalıcı olarak saklayan depolama aygıtıdır." },
+      { name: "Pardus İşletim Sistemi", type: "yazilim", note: "Donanımı yöneten yerli sistem yazılımıdır." },
+      { name: "Fare (Mouse)", type: "giris", note: "İmleçle tıklama ve yönlendirme yapan giriş aygıtıdır." },
+      { name: "Hoparlör", type: "cikis", note: "Sesleri duymamızı sağlayan çıkış ünitesidir." },
+      { name: "USB Flash Bellek", type: "depolama", note: "Taşınabilir veri depolama birimidir." },
+      { name: "Scratch Kodlama Aracı", type: "yazilim", note: "Blok tabanlı kodlama yapmaya yarayan uygulama yazılımıdır." },
+      { name: "Mikrofon", type: "giris", note: "Sesimizi bilgisayara aktaran giriş birimidir." },
+      { name: "Yazıcı (Printer)", type: "cikis", note: "Belgeleri kağıda döken çıkış aygıtıdır." }
+    ];
+
+    let sorterIndex = 0;
+    let sorterScore = 0;
+
+    function loadSorterCard() {
+      if (sorterIndex >= sorterPool.length) {
+        document.getElementById('sorter-current-item').innerHTML = `
+          <div class="py-2 text-center">
+            <span class="text-2xl">🎉</span>
+            <div class="font-outfit font-extrabold text-slate-900 text-base">Tüm Kartlar Ayrıştırıldı!</div>
+            <p class="text-xs text-slate-500 mt-0.5">Skorun: ${sorterScore} / ${sorterPool.length}</p>
+            <button onclick="resetSorterGame()" class="mt-2 px-4 py-1.5 rounded-xl bg-brand-600 text-white text-xs font-bold">Tekrar Oyna</button>
+          </div>
+        `;
+        return;
+      }
+      const it = sorterPool[sorterIndex];
+      document.getElementById('sorter-current-item').innerText = it.name;
+      document.getElementById('sorter-feedback-msg').innerText = "";
+    }
+
+    function sortItem(category) {
+      if (sorterIndex >= sorterPool.length) return;
+      const it = sorterPool[sorterIndex];
+      const msg = document.getElementById('sorter-feedback-msg');
+
+      if (category === it.type) {
+        sorterScore++;
+        audioSynth.playChime();
+        addXP(10, "Donanım Ayrıştırma");
+        msg.className = "text-xs sm:text-sm font-extrabold text-emerald-600";
+        msg.innerText = `🎯 Tebrikler! ${it.name}: ${it.note}`;
+        if (sorterScore >= 7) unlockBadge('sorterPro');
+      } else {
+        audioSynth.playError();
+        msg.className = "text-xs sm:text-sm font-extrabold text-rose-600";
+        msg.innerText = `⚠️ Dikkat! ${it.name} bu sınıfta değil. (${it.note})`;
+      }
+
+      document.getElementById('sorter-score').innerText = sorterScore;
+      sorterIndex++;
+      setTimeout(loadSorterCard, 1400);
+    }
+
+    function resetSorterGame() {
+      sorterIndex = 0;
+      sorterScore = 0;
+      document.getElementById('sorter-score').innerText = "0";
+      loadSorterCard();
+    }
+
+    // ==============================================================
+    // 8. GAME 3: ALGORİTMA & ROBOT LAB
+    // ==============================================================
+    const gridMap = [
+      [1, 0, 3, 0],
+      [0, 0, 3, 0],
+      [0, 3, 0, 2],
+      [0, 0, 0, 0]
+    ];
+    let robotSim = { x: 0, y: 0, dir: 'RIGHT' };
+    let robotQueue = [];
+
+    function setupRobotGrid() {
+      const container = document.getElementById('robot-grid-container');
+      container.innerHTML = "";
+
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          const tile = document.createElement('div');
+          tile.id = `tile-${r}-${c}`;
+          tile.className = "w-full h-full rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-lg select-none shadow-sm transition";
+
+          if (gridMap[r][c] === 3) {
+            tile.innerText = "🛑";
+            tile.classList.add("bg-rose-50", "border-rose-200");
+          } else if (gridMap[r][c] === 2) {
+            tile.innerText = "⭐";
+            tile.classList.add("bg-amber-50", "border-amber-300");
+          }
+          container.appendChild(tile);
+        }
+      }
+      renderRobotMarker();
+    }
+
+    function renderRobotMarker() {
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+          const t = document.getElementById(`tile-${r}-${c}`);
+          if (t && t.innerText === "🤖") t.innerText = "";
+        }
+      }
+      const cur = document.getElementById(`tile-${robotSim.y}-${robotSim.x}`);
+      if (cur) cur.innerText = "🤖";
+    }
+
+    function pushRobotCommand(cmd) {
+      if (robotQueue.length >= 8) {
+        showToast("En fazla 8 komut bloğu ekleyebilirsin!");
+        return;
+      }
+      robotQueue.push(cmd);
+      audioSynth.playChime();
+      renderRobotQueue();
+    }
+
+    function removeRobotCommand(idx) {
+      robotQueue.splice(idx, 1);
+      renderRobotQueue();
+    }
+
+    function renderRobotQueue() {
+      const list = document.getElementById('robot-commands-list');
+      document.getElementById('robot-queue-length').innerText = `${robotQueue.length} / 8 Adım`;
+
+      if (robotQueue.length === 0) {
+        list.innerHTML = `<div class="text-slate-400 text-xs text-center py-6" id="empty-robot-hint">Blok butonlarına dokunarak robotun algoritmasını tasarla.</div>`;
+        return;
+      }
+
+      list.innerHTML = robotQueue.map((c, i) => {
+        let label = "1 Adım İleri Git";
+        let icon = "arrow-up";
+        if (c === 'RIGHT') { label = "Sağa Dön (90°)"; icon = "rotate-cw"; }
+        if (c === 'LEFT') { label = "Sola Dön (90°)"; icon = "rotate-ccw"; }
+
+        return `
+          <div class="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-semibold shadow-sm">
+            <span class="flex items-center gap-1.5">
+              <span class="text-slate-400 font-mono text-[10px]">${i + 1}.</span>
+              <i data-lucide="${icon}" class="w-3.5 h-3.5 text-brand-600"></i>
+              ${label}
+            </span>
+            <button onclick="removeRobotCommand(${i})" class="text-slate-400 hover:text-rose-500 transition">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function resetRobotSim() {
+      robotSim = { x: 0, y: 0, dir: 'RIGHT' };
+      robotQueue = [];
+      document.getElementById('robot-status-feedback').innerText = "";
+      renderRobotQueue();
+      renderRobotMarker();
+    }
+
+    async function runRobotSim() {
+      if (robotQueue.length === 0) {
+        document.getElementById('robot-status-feedback').innerText = "Lütfen önce en az 1 komut bloğu ekleyin!";
+        return;
+      }
+
+      robotSim = { x: 0, y: 0, dir: 'RIGHT' };
+      renderRobotMarker();
+      const fb = document.getElementById('robot-status-feedback');
+      fb.className = "text-xs font-bold text-brand-700";
+      fb.innerText = "Robot kodları yürütüyor...";
+
+      for (let i = 0; i < robotQueue.length; i++) {
+        const cmd = robotQueue[i];
+        await new Promise(res => setTimeout(res, 400));
+
+        if (cmd === 'RIGHT') {
+          const dirs = ['UP', 'RIGHT', 'DOWN', 'LEFT'];
+          const idx = dirs.indexOf(robotSim.dir);
+          robotSim.dir = dirs[(idx + 1) % 4];
+        } else if (cmd === 'LEFT') {
+          const dirs = ['UP', 'RIGHT', 'DOWN', 'LEFT'];
+          const idx = dirs.indexOf(robotSim.dir);
+          robotSim.dir = dirs[(idx + 3) % 4];
+        } else if (cmd === 'FORWARD') {
+          let nx = robotSim.x;
+          let ny = robotSim.y;
+
+          if (robotSim.dir === 'RIGHT') nx++;
+          if (robotSim.dir === 'LEFT') nx--;
+          if (robotSim.dir === 'DOWN') ny++;
+          if (robotSim.dir === 'UP') ny--;
+
+          if (nx < 0 || nx > 3 || ny < 0 || ny > 3) {
+            audioSynth.playError();
+            fb.className = "text-xs font-bold text-rose-600";
+            fb.innerText = "💥 HATA: Robot sınırların dışına çıktı!";
+            return;
+          }
+
+          if (gridMap[ny][nx] === 3) {
+            audioSynth.playError();
+            fb.className = "text-xs font-bold text-rose-600";
+            fb.innerText = "🛑 HATA: Robot engele çarptı!";
+            return;
+          }
+
+          robotSim.x = nx;
+          robotSim.y = ny;
+          renderRobotMarker();
+        }
+      }
+
+      // Check target at (x: 3, y: 2)
+      if (robotSim.x === 3 && robotSim.y === 2) {
+        audioSynth.playFanfare();
+        fb.className = "text-xs font-extrabold text-emerald-600";
+        fb.innerText = "⭐ HARİKA! Robot hedef çipe ulaştı. +30 XP kazandın!";
+        addXP(30, "Algoritma Başarısı");
+        unlockBadge('robotMaster');
+      } else {
+        fb.className = "text-xs font-bold text-amber-600";
+        fb.innerText = "Robot durdu fakat çipe henüz ulaşamadı. Komutları düzenle!";
+      }
+    }
+
+    // ==============================================================
+    // 9. DICTIONARY / ENCYCLOPEDIA
+    // ==============================================================
+    function renderDictionary(filter = "all") {
+      const container = document.getElementById('dictionary-grid');
+      const list = filter === "all" ? dictionaryItems : dictionaryItems.filter(item => item.cat === filter);
+
+      container.innerHTML = list.map(item => `
+        <div class="p-4 rounded-2xl bg-white border border-slate-200 hover:border-brand-400 hover:shadow-card-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <h4 class="font-outfit font-extrabold text-slate-900 text-sm">${item.term}</h4>
+            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+              ${item.cat}
+            </span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">${item.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function filterDictionary(category) {
+      document.querySelectorAll('.dict-chip').forEach(btn => {
+        btn.className = "dict-chip px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition";
+      });
+      event.target.className = "dict-chip px-3 py-1.5 rounded-xl bg-brand-600 text-white text-xs font-bold shadow-sm transition";
+      renderDictionary(category);
+    }
+
+    // ==============================================================
+    // 10. GEMINI 2.5 FLASH AI MENTOR INTEGRATION
+    // ==============================================================
+    const AI_PEDAGOGICAL_PROMPT = `
+      Sen Türkiye Yüzyılı Maarif Modeli (TYMM) Ortaokul 5. ve 6. sınıf "Bilişim Teknolojileri ve Yazılım" dersine özel geliştirilmiş bilge öğretmen SiberBot'sun.
+      Öğrencilerin yaş grubu 10-12 yaş arasındadır.
+      Pedagojik Kuralların:
+      1. Daima Türkçe, nazik, arkadaş canlısı ve cesaretlendirici bir dil kullan.
+      2. Bilgisayar kavramlarını günlük yaşam örnekleriyle ve analojilerle açıkla (Örn: RAM = Çalışma Masası, Sabit Disk = Kitaplık, Algoritma = Kek Tarifi).
+      3. Yanıtları çok uzun paragraflarla boğma; kısa, net ve madde işaretleriyle açıkla.
+      4. Asla öğrencinin ödevini doğrudan tek başına yapma, öğrencinin kendisinin mantık yürütmesini sağla.
+    `;
+
+    async function handleSendAiMessage(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('ai-prompt-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendAiMessage(text, 'user');
+      input.value = "";
+      audioSynth.playChime();
+
+      const loaderId = appendAiLoader();
+
+      try {
+        const apiKey = ""; // Canvas runtime provides this
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+        const payload = {
+          contents: [{ parts: [{ text }] }],
+          systemInstruction: { parts: [{ text: AI_PEDAGOGICAL_PROMPT }] }
+        };
+
+        const res = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        removeAiLoader(loaderId);
+
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Küçük bir bağlantı gecikmesi oldu. Sorunu tekrar yazabilir misin?";
+        appendAiMessage(reply, 'bot');
+        addXP(5, "AI Soru Sorma");
+      } catch (err) {
+        removeAiLoader(loaderId);
+        appendAiMessage("Geçici bir internet aksaması oluştu. Lütfen biraz sonra tekrar dene!", 'bot');
+      }
+    }
+
+    function appendAiMessage(text, sender) {
+      const box = document.getElementById('ai-chat-box');
+      const row = document.createElement('div');
+      row.className = sender === 'user' ? "flex items-start justify-end gap-2.5" : "flex items-start gap-2.5";
+
+      if (sender === 'user') {
+        row.innerHTML = `
+          <div class="p-3 rounded-2xl rounded-tr-none bg-brand-600 text-white text-xs sm:text-sm max-w-[85%] leading-relaxed shadow-sm">
+            ${escapeHtml(text)}
+          </div>
+          <div class="w-7 h-7 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-xs shrink-0 font-outfit">
+            SEN
+          </div>
+        `;
+      } else {
+        row.innerHTML = `
+          <div class="w-7 h-7 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 text-xs">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-none bg-white border border-slate-200 text-slate-800 text-xs sm:text-sm max-w-[85%] leading-relaxed shadow-card-sm space-y-1">
+            ${formatMarkdown(text)}
+          </div>
+        `;
+      }
+
+      box.appendChild(row);
+      box.scrollTop = box.scrollHeight;
+      lucide.createIcons();
+    }
+
+    function appendAiLoader() {
+      const id = "loader-" + Date.now();
+      const box = document.getElementById('ai-chat-box');
+      const row = document.createElement('div');
+      row.id = id;
+      row.className = "flex items-start gap-2.5";
+      row.innerHTML = `
+        <div class="w-7 h-7 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 text-xs">
+          <i data-lucide="bot" class="w-4 h-4"></i>
+        </div>
+        <div class="p-3 rounded-2xl bg-white border border-slate-200 text-brand-700 text-xs font-bold flex items-center gap-2 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+          SiberBot düşünüyor...
+        </div>
+      `;
+      box.appendChild(row);
+      box.scrollTop = box.scrollHeight;
+      lucide.createIcons();
+      return id;
+    }
+
+    function removeAiLoader(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    function askPromptChip(txt) {
+      document.getElementById('ai-prompt-input').value = txt;
+      handleSendAiMessage();
+    }
+
+    function clearChatThread() {
+      const box = document.getElementById('ai-chat-box');
+      box.innerHTML = `
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 text-xs">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="p-3.5 rounded-2xl rounded-tl-none bg-white border border-slate-200 text-slate-800 text-xs sm:text-sm max-w-[85%] leading-relaxed shadow-card-sm space-y-1">
+            <p class="font-bold text-brand-700">Sohbet yenilendi! ✨</p>
+            <p>Yeni bir bilişim konusu veya kodlama sorusu sormak için hazırım.</p>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function formatMarkdown(str) {
+      return str
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n\n/g, '<br/><br/>')
+        .replace(/\n- /g, '<br/>• ');
+    }
+
+    // ==============================================================
+    // 11. NAVIGATION & UI HELPERS
+    // ==============================================================
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+
+      // Desktop nav button active states
+      document.querySelectorAll('.desk-nav-btn').forEach(b => {
+        b.className = "desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition text-slate-600 hover:text-brand-600 hover:bg-slate-100";
+      });
+      const activeDesk = document.getElementById(`desk-nav-${tabKey}`);
+      if (activeDesk) {
+        activeDesk.className = "desk-nav-btn px-4 py-2 rounded-xl flex items-center gap-2 transition bg-brand-600 text-white shadow-sm";
+      }
+
+      // Mobile nav button active states
+      document.querySelectorAll('.mob-nav-btn').forEach(b => {
+        b.className = "mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-slate-500 hover:text-brand-600 transition flex-1";
+      });
+      const activeMob = document.getElementById(`mob-nav-${tabKey}`);
+      if (activeMob) {
+        activeMob.className = "mob-nav-btn flex flex-col items-center justify-center p-1.5 rounded-xl text-brand-600 font-bold transition flex-1";
+      }
+
+      const target = document.getElementById(`tab-${tabKey}`);
+      if (target) target.classList.remove('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function switchGame(gameKey) {
+      document.querySelectorAll('.game-view').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.game-nav-btn').forEach(b => {
+        b.className = "game-nav-btn py-2 px-2 sm:px-3 rounded-xl text-slate-600 hover:text-brand-600 transition text-center";
+      });
+
+      const pane = document.getElementById(`game-pane-${gameKey}`);
+      if (pane) pane.classList.remove('hidden');
+
+      const btn = document.getElementById(`game-btn-${gameKey}`);
+      if (btn) {
+        btn.className = "game-nav-btn py-2 px-2 sm:px-3 rounded-xl bg-brand-600 text-white font-bold transition text-center shadow-sm";
+      }
+      lucide.createIcons();
+    }
+
+    function openBadgesModal() {
+      const grid = document.getElementById('badges-modal-grid');
+      grid.innerHTML = Object.keys(appState.badges).map(key => {
+        const b = appState.badges[key];
+        return `
+          <div class="p-3.5 rounded-2xl border ${b.unlocked ? 'bg-brand-50 border-brand-300' : 'bg-slate-50 border-slate-200 opacity-60'} flex flex-col items-center text-center">
+            <div class="w-10 h-10 rounded-2xl ${b.unlocked ? 'bg-amber-100 text-amber-600' : 'bg-slate-200 text-slate-400'} flex items-center justify-center mb-1.5">
+              <i data-lucide="${b.icon}" class="w-5 h-5"></i>
+            </div>
+            <div class="text-xs font-outfit font-extrabold text-slate-900">${b.name}</div>
+            <div class="text-[10px] text-slate-500 mt-0.5 leading-snug">${b.desc}</div>
+            <span class="mt-2 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full ${b.unlocked ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
+              ${b.unlocked ? 'Kazanıldı' : 'Kilitli'}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('badges-modal-sheet').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeBadgesModal() {
+      document.getElementById('badges-modal-sheet').classList.add('hidden');
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = "fixed top-4 right-4 z-50 px-4 py-3 rounded-2xl bg-white border border-brand-300 text-slate-900 text-xs font-bold shadow-card-lg flex items-center gap-2 transform transition-all duration-300 -translate-y-4 opacity-0";
+      toast.innerHTML = `<i data-lucide="bell" class="w-4 h-4 text-brand-600"></i> <span>${msg}</span>`;
+      document.body.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => toast.classList.remove('-translate-y-4', 'opacity-0'), 30);
+      setTimeout(() => {
+        toast.classList.add('-translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 400);
+      }, 3200);
+    }
+
+    // Window Load Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderCurriculum();
+      renderDictionary();
+      loadShieldCard();
+      loadSorterCard();
+      setupRobotGrid();
+      updateMetricsUI();
+    });
+  </script>
+</body>
+</html>
